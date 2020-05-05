@@ -12,5 +12,9 @@ export const RemoveItemById = (item) => ({
   type: CartType.REMOVE_ITEMS_BY_ID,
   payload: item,
 });
+export const DecreaseItemByID = (item) => ({
+  type: CartType.DECREASE_ITEMS_BY_ID,
+  payload: item,
+});
 
 export default ToggleCart;
