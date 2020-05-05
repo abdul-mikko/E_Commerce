@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
 import "./checkout.styles.scss";
+import CheckoutItem from "../../Components/Checkout.item/Checkout.item.comp";
 
 const Checkout = ({ total, Items }) => {
   return (
@@ -28,7 +29,9 @@ const Checkout = ({ total, Items }) => {
           <span>Remove</span>
         </div>
       </div>
-      {Items.map((item) => item.name)}
+      {Items.map((item) => (
+        <CheckoutItem cartitem={item} key={item.id} />
+      ))}
       <div className="total">
         <span>TOTAL: ${total}</span>
       </div>
