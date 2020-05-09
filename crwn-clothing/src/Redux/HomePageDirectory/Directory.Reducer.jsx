@@ -1,5 +1,5 @@
 const INIT_STATE = {
-  sections: [
+  directoryItems: [
     {
       title: "hats",
       imageUrl: "https://i.ibb.co/cvpntL1/hats.png",

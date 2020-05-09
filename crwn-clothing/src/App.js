@@ -2,8 +2,8 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 
-import Homepage from './Pages/homepage/homepage.comp';
-import ShopPage from './Pages/shop page/shopPage.comp';
+import Homepage from './Pages/homePage/homepage.comp'
+import ShopPage from './Pages/shopPage/shopPage.comp';
 import Header from './Components/Header/Header.comp';
 import LoginPage from '../src/Pages/login/Login.comp'
 

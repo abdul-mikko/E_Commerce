@@ -13,7 +13,7 @@ const CartReducer = (state = CART_INITAL_VALUE, action) => {
         ...state,
         hidden: !state.hidden,
       };
-    case CartType.ADD_ITEMS:
+    case CartType.ADD_ITEMS_TO_CART:
       return {
         ...state,
         cartitem: addItem(state.cartitem, action.payload),

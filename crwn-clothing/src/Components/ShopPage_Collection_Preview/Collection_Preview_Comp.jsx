@@ -1,6 +1,6 @@
 import React from "react";
 import "./collection-preview.styles.scss";
-import CollectionItem from "../Collection-item/Collectionitem";
+import CollectionItem from "../ShopPage.Collection.Item/Collection.Item";
 
 const CollectionPreview = ({ title, items }) => {
   return (

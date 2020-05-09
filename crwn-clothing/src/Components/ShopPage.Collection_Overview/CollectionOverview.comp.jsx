@@ -1,9 +1,9 @@
 import React from "react";
-import CollectionPreview from "../Collection_Preview/Collection_pre_Comp";
-
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectCollectionItems } from "../../Redux/CollectionPage/Collection.Selector";
+
+import { selectCollectionItems } from "../../Redux/ShopPage/ShopPage.Collection.Selector";
+import CollectionPreview from "../ShopPage_Collection_Preview/Collection_Preview_Comp";
 
 const CollectionOverview = ({ Collections }) => {
   return (
