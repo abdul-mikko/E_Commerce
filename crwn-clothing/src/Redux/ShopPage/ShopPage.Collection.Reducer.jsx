@@ -1,7 +1,7 @@
 import SHOP_DATA from "./Shop_Data.js";
 
 const INIT_VAL = {
-  ShopDataCollectionsArray: SHOP_DATA,
+  ShopDataCollectionsArrays: SHOP_DATA,
 };
 
 const collectionReducer = (state = INIT_VAL, action) => {

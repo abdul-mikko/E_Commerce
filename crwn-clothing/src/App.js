@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 
 import Homepage from './Pages/homePage/homepage.comp'
@@ -16,6 +16,8 @@ import { createStructuredSelector } from 'reselect'
 
 import './App.css';
 import Checkout from './Pages/Checkout/Checkout.page.comp'
+import FinalCollectionPageComp from './Pages/FinalCollectionPage/FinalCollectionPage.comp';
+
 
 class App extends React.Component {
 
@@ -42,6 +44,7 @@ class App extends React.Component {
 
     })
   }
+
   componentWillUnmount() {
     this.unsubscribeFromAuth()
   }
@@ -51,10 +54,11 @@ class App extends React.Component {
       <div>
         <Header />
         <Switch>
-          <Route exact path="/" component={Homepage}></Route>
-          <Route exact path="/shop" component={ShopPage}></Route>
-          <Route exact path="/checkout" component={Checkout}></Route>
-          <Route exact path="/signin" render={() => this.props.currentUser ? (<Redirect path="/" />) : (<LoginPage />)} ></Route>
+          <Route exact path="/" component={Homepage} />
+          <Route path="/shop" component={ShopPage} />
+          <Route path="/checkout" component={Checkout} />
+          <Route path="/signin" render={() => this.props.currentUser ? (<Redirect path="/" />) : (<LoginPage />)} />
+
         </Switch>
       </div >
     );

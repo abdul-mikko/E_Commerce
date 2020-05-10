@@ -1,9 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
+import { Route } from "react-router-dom";
 
-import { selectCollectionItems } from "../../Redux/ShopPage/ShopPage.Collection.Selector";
+import { CollectionObjToArray } from "../../Redux/ShopPage/ShopPage.Collection.Selector";
 import CollectionPreview from "../ShopPage_Collection_Preview/Collection_Preview_Comp";
+import FinalCollectionPageComp from "../../Pages/FinalCollectionPage/FinalCollectionPage.comp";
 
 const CollectionOverview = ({ Collections }) => {
   return (
@@ -16,7 +18,7 @@ const CollectionOverview = ({ Collections }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  Collections: selectCollectionItems,
+  Collections: CollectionObjToArray,
 });
 
 export default connect(mapStateToProps)(CollectionOverview);
