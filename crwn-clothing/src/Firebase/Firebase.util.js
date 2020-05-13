@@ -3,6 +3,7 @@ import 'firebase/firestore'
 import 'firebase/auth'
 
 
+
 const firebaseConfig = {
     apiKey: "AIzaSyCtJY15q9WUpkUt5NW6Sli6qtlameDRk8E",
     authDomain: "crown-db-5d43c.firebaseapp.com",
@@ -24,6 +25,23 @@ export const firestore = firebase.firestore();
 var provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' })
 export const signInWithGoogle = () => auth.signInWithPopup(provider)
+
+
+export const AddCollectionAndDocInDB = async (collectionkey, dataToAdd) => {
+    const CollectionRef = firestore.collection(collectionkey)
+    console.log(CollectionRef)
+
+    const batch = firestore.batch()
+    dataToAdd.forEach(data => {
+        const newDocRef = CollectionRef.doc();
+        batch.set(newDocRef, data)
+    })
+    return await batch.commit();
+}
+
+
+
+
 
 
 export const createUserProfileDocInDB = async (userAuth, AdditionalData) => {

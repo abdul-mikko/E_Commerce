@@ -7,16 +7,16 @@ import ShopPage from './Pages/shopPage/shopPage.comp';
 import Header from './Components/Header/Header.comp';
 import LoginPage from '../src/Pages/login/Login.comp'
 
-import { auth, createUserProfileDocInDB } from './Firebase/Firebase.util'
+import { auth, createUserProfileDocInDB, AddCollectionAndDocInDB } from './Firebase/Firebase.util'
 
-import { setCurrentUser } from './Redux/User/user.action'
 import { connect } from 'react-redux'
+import { setCurrentUser } from './Redux/User/user.action'
 import { selectCurrentUser } from './Redux/User/user.selector'
 import { createStructuredSelector } from 'reselect'
+import { CollectionObjToArray } from './Redux/ShopPage/ShopPage.Collection.Selector'
 
 import './App.css';
 import Checkout from './Pages/Checkout/Checkout.page.comp'
-import FinalCollectionPageComp from './Pages/FinalCollectionPage/FinalCollectionPage.comp';
 
 
 class App extends React.Component {
@@ -24,7 +24,7 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser } = this.props
+    const { setCurrentUser, collectionDataToDB } = this.props
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRefUID = await createUserProfileDocInDB(userAuth);
@@ -38,9 +38,10 @@ class App extends React.Component {
         })
 
       }
-      else {
-        setCurrentUser(userAuth)
-      }
+
+      setCurrentUser(userAuth)
+
+      AddCollectionAndDocInDB('collectionKey', collectionDataToDB.map(({ title, items }) => ({ items, title })));
 
     })
   }
@@ -69,7 +70,8 @@ const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 })
 const mapStateToProps = (createStructuredSelector)({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  collectionDataToDB: CollectionObjToArray
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
