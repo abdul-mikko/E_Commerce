@@ -8,17 +8,14 @@ export const selectCollectionItems = createSelector(
 );
 
 const selectCollectionByID = (paramsURL) =>
-  createSelector(
-    [selectCollectionItems],
-    (ShopDataCollectionsArrays) => ShopDataCollectionsArrays[paramsURL]
+  createSelector([selectCollectionItems], (ShopDataCollectionsArrays) =>
+    ShopDataCollectionsArrays ? ShopDataCollectionsArrays[paramsURL] : []
   );
 
 export const CollectionObjToArray = createSelector(
   [selectCollectionItems],
   (ShopDataCollectionsArrays) =>
-    Object.keys(ShopDataCollectionsArrays).map(
-      (key) => ShopDataCollectionsArrays[key]
-    )
+    ShopDataCollectionsArrays ? Object.values(ShopDataCollectionsArrays) : null
 );
 
 export default selectCollectionByID;

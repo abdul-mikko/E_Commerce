@@ -27,7 +27,7 @@ provider.setCustomParameters({ prompt: 'select_account' })
 export const signInWithGoogle = () => auth.signInWithPopup(provider)
 
 
-export const AddCollectionAndDocInDB = async (collectionkey, dataToAdd) => {
+export const CreateCollectionAndDocInDB = async (collectionkey, dataToAdd) => {
     const CollectionRef = firestore.collection(collectionkey)
     console.log(CollectionRef)
 
@@ -41,7 +41,22 @@ export const AddCollectionAndDocInDB = async (collectionkey, dataToAdd) => {
 
 
 
+export const fetchDataFromDB = (collectionkey) => {
 
+    const Docref = collectionkey.docs.map(doc => {
+        const { title, items } = doc.data();
+        return {
+            routeName: encodeURI(title.toLowerCase()),
+            title,
+            items,
+            id: doc.id
+        }
+    })
+    return Docref.reduce((acc, value) => {
+        acc[value.title.toLowerCase()] = value
+        return acc;
+    }, {})
+}
 
 
 export const createUserProfileDocInDB = async (userAuth, AdditionalData) => {
@@ -49,9 +64,9 @@ export const createUserProfileDocInDB = async (userAuth, AdditionalData) => {
         return;
     }
     const userRefUID = firestore.doc(`users/${userAuth.uid}`);
-    console.log("uid " + userRefUID)
+
     const snapShot = await userRefUID.get()
-    console.log("snapshot data at util" + snapShot.data())
+
 
     if (!snapShot.exists) {
         const { displayName, email } = userAuth;
