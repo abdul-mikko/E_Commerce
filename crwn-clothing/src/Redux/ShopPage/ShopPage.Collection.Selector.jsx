@@ -6,6 +6,10 @@ export const selectCollectionItems = createSelector(
   [selectCollection],
   (shopPageCollections) => shopPageCollections.ShopDataCollectionsArrays
 );
+export const selectFetching = createSelector(
+  [selectCollection],
+  (shopPageCollections) => shopPageCollections.isFetching
+);
 
 const selectCollectionByID = (paramsURL) =>
   createSelector([selectCollectionItems], (ShopDataCollectionsArrays) =>
@@ -15,7 +19,12 @@ const selectCollectionByID = (paramsURL) =>
 export const CollectionObjToArray = createSelector(
   [selectCollectionItems],
   (ShopDataCollectionsArrays) =>
-    ShopDataCollectionsArrays ? Object.values(ShopDataCollectionsArrays) : null
+    ShopDataCollectionsArrays ? Object.values(ShopDataCollectionsArrays) : []
+);
+
+export const selectLodingCollection = createSelector(
+  [selectCollection],
+  (shopPageCollections) => !!shopPageCollections.ShopDataCollectionsArrays
 );
 
 export default selectCollectionByID;

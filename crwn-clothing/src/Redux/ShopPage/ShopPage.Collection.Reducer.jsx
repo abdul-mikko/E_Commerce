@@ -1,16 +1,29 @@
-import SHOP_DATA from "./Shop_Data.js";
-import { updateCollectionFromDB } from "./Shop.types";
+import fetchCollectionFromDB from "./Shop.types";
 
 const INIT_VAL = {
-  ShopDataCollectionsArrays: "undefined",
+  ShopDataCollectionsArrays: null,
+  isFetching: false,
+  errorMessage: "",
 };
 
 const collectionReducer = (state = INIT_VAL, action) => {
   switch (action.type) {
-    case updateCollectionFromDB.UPDATAE_COLLECTON_FROM_DB:
+    case fetchCollectionFromDB.FETCH_COLLECTION_START:
       return {
         ...state,
+        isFetching: true,
+      };
+    case fetchCollectionFromDB.FETCH_COLLECTION_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
         ShopDataCollectionsArrays: action.payload,
+      };
+    case fetchCollectionFromDB.FETCH_COLLECTION_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        errorMessage: action.payload,
       };
     default:
       return state;
